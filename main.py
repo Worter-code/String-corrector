@@ -37,5 +37,13 @@ def correct_email(query):
         return EMPTY_TEXT
 
 
+def correct_age(query):
+    corrected = re.sub(r'\D+', '', query)
+    if len(corrected) > 0:
+        return corrected
+    else:
+        return EMPTY_TEXT
+
+
 if __name__ == '__main__':
     print('test')

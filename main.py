@@ -46,4 +46,22 @@ def correct_age(query):
 
 
 if __name__ == '__main__':
-    print('test')
+    with open('Input.txt', 'r', encoding='utf-8') as file:
+        lines = file.readlines()
+
+    with open('Output.txt', 'w', encoding='utf-8') as file:
+        for line in lines:
+            line_content = line.rstrip().split('|')
+            if len(line_content) != 4:
+                file.write('Неверные данные\n')
+                continue
+            name, age, phone, email = line_content
+
+            name = correct_name(name)
+            age = correct_age(age)
+            phone = correct_phone(phone)
+            email = correct_email(email)
+
+            corrected_line = '|'.join((name, age, phone, email))
+
+            file.write(f'{corrected_line}\n')

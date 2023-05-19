@@ -1,7 +1,7 @@
 import re
 
 
-EMPTY_TEXT = ' - '
+EMPTY_TEXT = '___'
 
 
 def correct_name(query):
@@ -20,6 +20,19 @@ def correct_phone(query):
         part3 = corrected[7:9]
         part4 = corrected[9:11]
         return f'+7 ({part1}) {part2}-{part3}-{part4}'
+    else:
+        return EMPTY_TEXT
+
+
+def correct_email(query):
+    corrected = re.sub(r'\s+', '', query)
+    duplicates = '@.'
+    for symbol in duplicates:
+        corrected = re.sub(f'[{symbol}]+', symbol, corrected)
+
+    email_regex = re.compile(r'[\w-]+(\.[\w-]+)*@[\w-]+(\.\w+)*\.[A-Za-z]{2,}')
+    if re.fullmatch(email_regex, corrected):
+        return corrected
     else:
         return EMPTY_TEXT
 

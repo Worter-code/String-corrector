@@ -28,3 +28,23 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+  coveralls:
+    runs-on: ubuntu-latest
+    needs: [ testing ]
+    steps:
+      - name: clone repository to VM
+        uses: actions/checkout@v3
+
+      - name: install libraries
+        run: |
+          pip install coverage
+          pip install coverage-lcov
+
+      - name: testing
+        run: |
+          coverage run --source=. -m unittest discover
+          mkdir coverage
+          coverage-lcov --output_file_path coverage/lcov.info
+
+      - name: Coveralls GitHubActions
+        uses: coverallsapp/github-action@v1

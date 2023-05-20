@@ -45,24 +45,39 @@ def correct_age(query):
         return EMPTY_TEXT
 
 
+def open_input(path):
+    with open(path, 'r', encoding='utf-8') as file:
+        lines_from_file = file.readlines()
+    return lines_from_file
+
+
+def correct_all(source_lines):
+    corrected = ''
+    for line in source_lines:
+        line_content = line.rstrip().split('|')
+        if len(line_content) != 4:
+            corrected += 'Некорректная строка\n'
+            continue
+
+        name, age, phone, email = line_content
+        name = correct_name(name)
+        age = correct_age(age)
+        phone = correct_phone(phone)
+        email = correct_email(email)
+
+        corrected_line = '|'.join((name, age, phone, email))
+        corrected += f'{corrected_line}\n'
+
+    return corrected
+
+
+def save_result(content, path):
+    with open(path, 'w', encoding='utf-8') as file:
+        file.write(content)
+
+
 if __name__ == '__main__':
-    with open('Input.txt', 'r', encoding='utf-8') as file:
-        lines = file.readlines()
-
-    with open('Output.txt', 'w', encoding='utf-8') as file:
-        for line in lines:
-            line_content = line.rstrip().split('|')
-            if len(line_content) != 4:
-                file.write('Неверные данные\n')
-                continue
-            name, age, phone, email = line_content
-
-            name = correct_name(name)
-            age = correct_age(age)
-            phone = correct_phone(phone)
-            email = correct_email(email)
-
-            corrected_line = '|'.join((name, age, phone, email))
-
-            file.write(f'{corrected_line}\n')
-    print('Коррекция завершена')
+    lines = open_input('input.txt')
+    corrected_lines = correct_all(lines)
+    save_result(corrected_lines, 'output.txt')
+    print('Файл прошел корректировку')

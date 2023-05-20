@@ -77,7 +77,7 @@ def save_result(content, path):
 
 
 if __name__ == '__main__':
-    lines = open_input('input.txt')
+    lines = open_input('Input.txt')
     corrected_lines = correct_all(lines)
     save_result(corrected_lines, 'output.txt')
     print('Файл прошел корректировку')

@@ -45,7 +45,7 @@ class ProgramTest(TestCase):
         test_query = ['АнТоШа|4|000000|it@mirea.ru',
                       'Степан|восемдесят два|88005553535|stepan@@mail.ru',
                       'name|age|phone|email']
-        expected = f'Антоша|10|{EMPTY_TEXT}|it@mirea.ru\n' +\
+        expected = f'Антоша|4|{EMPTY_TEXT}|it@mirea.ru\n' +\
                    f'Степан|{EMPTY_TEXT}|+7 (800) 555-35-35|stepan@mail.ru\n' +\
                    f'{EMPTY_TEXT}|{EMPTY_TEXT}|{EMPTY_TEXT}|{EMPTY_TEXT}\n'
         self.assertEqual(correct_all(test_query), expected)

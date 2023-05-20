@@ -1,4 +1,4 @@
-name: CI_Actions_with_SonarCloud
+name: CI_Actions_with_SonarCloud_and_Coveralls
  
 on:
   push:

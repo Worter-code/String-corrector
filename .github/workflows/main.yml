@@ -1,0 +1,16 @@
+name: CI_Actions
+ 
+on:
+  push:
+    branches: 
+      - master
+      
+jobs:
+  testing:
+    runs-on: ubuntu-latest
+    steps:
+      - name: clone repository to VM
+        uses: actions/checkout@v3
+
+      - name: run programm
+        run: python main.py

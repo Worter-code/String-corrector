@@ -65,3 +65,4 @@ if __name__ == '__main__':
             corrected_line = '|'.join((name, age, phone, email))
 
             file.write(f'{corrected_line}\n')
+    print('Коррекция завершена')
